@@ -1,0 +1,57 @@
+<div class="container mx-auto p-6">
+  <!-- <h1>{{ almacen | json }}</h1> -->
+  <h1 class="text-4xl font-extrabold text-center mb-6 text-blue-800">Reporte de Inventario</h1>
+
+  <div *ngIf="almacenes.length === 0" class="text-center text-xl text-gray-600">
+    <p>No hay almacenes disponibles.</p>
+  </div>
+
+  <div *ngFor="let almacen of almacenes" class="group bg-white p-6 mb-6 rounded-lg shadow-xl transform transition-transform duration-300 ease-in-out hover:scale-105 cursor-pointer"
+       (click)="toggleDetails(almacen)">
+       <!-- Contenedor de nombre e ID -->
+    <div class="flex items-center mb-4">
+      <img src="https://img.icons8.com/?size=100&id=XrEFnp33pJYw&format=png&color=000000" alt="Imagen del almacén" class="w-20 h-20 object-cover rounded-full mr-6">
+      <div class="flex-grow">
+        <h2 class="text-3xl font-semibold text-gray-800">{{ almacen.nombre }}</h2>
+        <span class="text-sm text-gray-500">ID: {{ almacen.id }}</span>
+        <button
+                class="flex items-center space-x-2 px-4 py-2 font-semibold text-white rounded-lg
+                      bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500
+                      hover:from-pink-500 hover:via-purple-500 hover:to-blue-500
+                      transition duration-300 shadow-lg"
+                      (click)="generatePDF(almacen)"
+                      >
+                <img
+                  src="https://img.icons8.com/?size=100&id=13417&format=png&color=FFFFFF"
+                  class="h-5 w-5"
+                  alt="PDF"
+                >
+                <span>Generar Reporte</span>
+              </button>
+      </div>
+
+    </div>
+
+    <!-- Mostrar detalles cuando se activa showDetails -->
+    <div *ngIf="almacen.showDetails" class="mt-4 text-gray-700 bg-gray-100 p-4 rounded-lg transition-all">
+      <p><strong>Dirección Completa:</strong> {{ almacen.direccion }}</p>
+
+      <!-- <h1> {{ almacen.medicamentos.medicamentos.medicamentos.length | json }}</h1> -->
+      <!-- Medicamentos -->
+      <div *ngIf="almacen.medicamentos.medicamentos.medicamentos.length > 0">
+        <h3 class="font-semibold text-lg mt-2">Medicamentos:</h3>
+        <ul class="list-disc pl-5">
+          <li *ngFor="let medicamento of almacen.medicamentos.medicamentos.medicamentos" class="mt-2">
+            <strong>{{ medicamento.nombreMedicamento }}:</strong> {{ medicamento.stock }} unidades
+          </li>
+        </ul>
+      </div>
+      <div *ngIf="almacen.medicamentos.medicamentos.length === 0" class="text-gray-500 mt-2">
+        No hay medicamentos disponibles en este almacén.
+      </div>
+
+      <!-- Más detalles...
+      <p><strong>Más detalles...</strong> Aquí puedes agregar más información sobre el almacen si es necesario.</p> -->
+    </div>
+  </div>
+</div>

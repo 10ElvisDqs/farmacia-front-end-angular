@@ -1,0 +1,75 @@
+<h3>{{Title}}</h3>
+
+<button class="btn btn-primary my-4" [routerLink]="['/clientes/create']"
+>
+     Crear Cliente
+</button>
+
+
+<!--<button class="btn btn-primary my-4" [routerLink]="['/ventas/create']"
+>
+     Crear Factura
+     
+    
+</button>-->
+
+@if (clientes.length==0){
+  <div class="alert alert-waring">No hay registros en el sistema</div>
+} @else {
+
+  <table class="table table-hover table-striped">
+      <thead>
+          <tr>
+            <th>id</th>
+            
+            <th>nombre</th>
+            <th>apellido</th>
+            
+            <th>email</th>
+            <th>genero</th>
+            <th>edad</th>
+           
+            @if(admin){
+                  <th>remove</th>
+                  <th>update</th>
+            }
+          </tr>
+      </thead>
+      <tbody>
+          @for (cliente of clientes; track $index) {
+            <tr>
+            <td>{{cliente.id}}</td>
+           
+            <td>{{cliente.nombre}}</td>
+            <td>{{cliente.apellido}}</td>
+           
+            <td>{{cliente.email}}</td>
+            <td>{{cliente.genero}}</td>
+            <td>{{cliente.edad}}</td>
+            
+            @if(admin){
+              <td>
+                  <button class="btn btn-danger btn-sm"
+                  (click)="onRemoveCliente(cliente.id)"
+                  >
+                      remove
+                  </button>
+              </td>
+              <td>
+                  <button class="btn btn-info btn-sm"
+                  [routerLink]="['/clientes/edit', cliente.id]">
+                      update
+                  </button>
+              </td>
+            }
+            </tr>
+            }
+          
+          
+      </tbody>
+  </table>
+  }
+  <paginator [paginator]="paginator" [url]="'/clientes/page'"/>
+
+
+

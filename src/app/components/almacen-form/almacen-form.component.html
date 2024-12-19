@@ -1,0 +1,48 @@
+  <div class="card">
+    <div class="card-content">
+        <div class="card-header">
+            <h5 class="card-title">Formulario {{(almacen.id > 0)? 'Update': 'Create'}} almacen</h5>
+        </div>
+        <div class="card-body">
+
+            <form (ngSubmit)="onSubmit1(almacenForm)" #almacenForm="ngForm">
+
+
+              
+
+                <div>
+                    <input placeholder="Nombre" name="nombre" [(ngModel)]="almacen.nombre" class="form-control my-2"
+                        #nombre="ngModel">
+
+                    @if (errors?.nombre) {
+                    <div class="text-danger">{{ errors.nombre }}</div>
+                    }
+
+                </div>
+
+                <div>
+                    <input placeholder="Direccion" name="direccion" [(ngModel)]="almacen.direccion" class="form-control my-2"
+                        type="direccion" #direccion="ngModel"> <!-- required email -->
+                    @if (errors?.email) {
+                        <div class="text-danger">{{ errors.direccion }}</div>
+                    }
+                </div>
+               
+            
+               
+              
+                <div>
+                    <button type="submit" class="btn btn-primary m-2"> <!-- [disabled]="userForm.invalid" -->
+                        {{(almacen.id > 0)? 'Update': 'Create'}}
+                    </button>
+
+                    <button type="button" class="btn btn-secondary my-2" (click)="onClear(almacenForm)">
+                        Clear
+                    </button>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+</div>

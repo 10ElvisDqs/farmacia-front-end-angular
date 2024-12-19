@@ -1,0 +1,63 @@
+  <div class="card">
+    <div class="card-content">
+        <div class="card-header">
+            <h5 class="card-title">Formulario {{(proveedor.id > 0)? 'Update': 'Create'}} Proveedor</h5>
+        </div>
+        <div class="card-body">
+
+            <form (ngSubmit)="onSubmit1(proveedorForm)" #proveedorForm="ngForm">
+
+
+              
+
+                <div>
+                    <input placeholder="Nombre" name="nombre" [(ngModel)]="proveedor.nombre" class="form-control my-2"
+                        #nombre="ngModel">
+
+                    @if (errors?.nombre) {
+                    <div class="text-danger">{{ errors.nombre }}</div>
+                    }
+
+                </div>
+               
+
+                <div>
+                    <input placeholder="Telefono" name="telefono" [(ngModel)]="proveedor.telefono" class="form-control my-2"
+                        #telefono="ngModel">
+
+                    @if (errors?.telefono) {
+                    <div class="text-danger">{{ errors.telefono }}</div>
+                    }
+                </div>
+                <div>
+                    <input placeholder="Email" name="email" [(ngModel)]="proveedor.email" class="form-control my-2"
+                        type="email" #email="ngModel"> <!-- required email -->
+                    @if (errors?.email) {
+                        <div class="text-danger">{{ errors.email }}</div>
+                    }
+                </div>
+                <div>
+                    <input placeholder="Direccion" name="direccion" [(ngModel)]="proveedor.direccion" class="form-control my-2"
+                        #direccion="ngModel"> <!-- required minlength="8" -->
+                        @if (errors?.direccion) {
+                        <div class="text-danger">{{ errors.direccion }}</div>
+                        }
+
+                </div>
+               
+              
+                <div>
+                    <button type="submit" class="btn btn-primary m-2"> <!-- [disabled]="userForm.invalid" -->
+                        {{(proveedor.id > 0)? 'Update': 'Create'}}
+                    </button>
+
+                    <button type="button" class="btn btn-secondary my-2" (click)="onClear(proveedorForm)">
+                        Clear
+                    </button>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+</div>

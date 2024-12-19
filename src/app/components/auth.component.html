@@ -1,0 +1,48 @@
+<div class="max-w-screen p-8 rounded-3xl  flex items-center justify-center flex-col lg:flex-row">
+  <!-- Imagen a la izquierda con animación de saludo -->
+  <div class="w-full lg:w-1/2 mb-8 lg:mb-0">
+    <img src="../../../assets/img/undraw_dev-productivity_c0yh (1).png" alt="Productivity SVG" class="w-full">
+  </div>
+
+  <!-- Formulario a la derecha -->
+  <div class="w-full sm:w-2/3 lg:w-1/3 bg-white p-8 rounded-3xl shadow-lg space-y-6 ">
+    <div class="text-center">
+      <h5 class="text-4xl font-bold text-gray-800 mb-4">Login Page</h5>
+      <p class="text-gray-600 text-lg">Enter your credentials to continue</p>
+    </div>
+
+    <div class="bg-white p-6 rounded-xl shadow-lg space-y-6">
+      <form (ngSubmit)="onSubmit()">
+        <!-- Username input -->
+        <input
+          name="username"
+          class="form-control my-4 p-4 w-full rounded-lg border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
+          placeholder="Username"
+          [(ngModel)]="user.username"
+          required />
+
+        <!-- Password input -->
+        <input
+          name="password"
+          class="form-control my-4 p-4 w-full rounded-lg border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
+          type="password"
+          placeholder="Password"
+          [(ngModel)]="user.password"
+          required />
+
+        <!-- Login button -->
+        <button
+          class="btn w-full p-4 mt-4 bg-green-500 text-white rounded-lg font-semibold transition-all transform hover:scale-105 focus:ring-2 focus:ring-green-300 hover:bg-green-400"
+          type="submit">
+          Login
+        </button>
+      </form>
+    </div>
+
+    <!-- Footer with links (commented out) -->
+    <!-- <div class="text-center mt-4">
+      <a href="#" class="text-blue-600 hover:text-blue-800 text-sm">Forgot Password?</a>
+      <p class="text-gray-500 text-sm mt-2">Don't have an account? <a href="#" class="text-blue-600 hover:text-blue-800">Sign Up</a></p>
+    </div> -->
+  </div>
+</div>

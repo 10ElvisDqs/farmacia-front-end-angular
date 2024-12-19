@@ -1,0 +1,65 @@
+  <div class="card">
+    <div class="card-content">
+        <div class="card-header">
+            <h5 class="card-title">Formulario {{(empleado.id > 0)? 'Update': 'Create'}} empleado</h5>
+        </div>
+        <div class="card-body">
+
+            <form (ngSubmit)="onSubmit1(empleadoForm)" #empleadoForm="ngForm">
+
+
+              
+
+                <div>
+                    <input placeholder="Nombre" name="nombre" [(ngModel)]="empleado.nombre" class="form-control my-2"
+                        #nombre="ngModel">
+
+                    @if (errors?.nombre) {
+                    <div class="text-danger">{{ errors.nombre }}</div>
+                    }
+
+                </div>
+
+                <div>
+                    <input placeholder="Paterno" name="paterno" [(ngModel)]="empleado.paterno" class="form-control my-2"
+                        type="paterno" #paterno="ngModel"> 
+                    @if (errors?.email) {
+                        <div class="text-danger">{{ errors.paterno }}</div>
+                    }
+                </div>
+                <div>
+                    <input placeholder="Materno" name="materno" [(ngModel)]="empleado.materno" class="form-control my-2"
+                        #direccion="ngModel"> <!-- required minlength="8" -->
+                        @if (errors?.materno) {
+                        <div class="text-danger">{{ errors.materno }}</div>
+                        }
+
+                </div>
+               
+
+                <div>
+                    <input placeholder="Telefono" name="telefono" [(ngModel)]="empleado.telefono" class="form-control my-2"
+                        #telefono="ngModel">
+
+                    @if (errors?.telefono) {
+                    <div class="text-danger">{{ errors.telefono }}</div>
+                    }
+                </div>
+            
+               
+              
+                <div>
+                    <button type="submit" class="btn btn-primary m-2"> <!-- [disabled]="userForm.invalid" -->
+                        {{(empleado.id > 0)? 'Update': 'Create'}}
+                    </button>
+
+                    <button type="button" class="btn btn-secondary my-2" (click)="onClear(empleadoForm)">
+                        Clear
+                    </button>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+</div>

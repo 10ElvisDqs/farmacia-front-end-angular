@@ -1,0 +1,61 @@
+<h3>{{Title}}</h3>
+
+<button class="btn btn-primary my-4" [routerLink]="['/proveedores/create']"
+>
+     Crear Proveedor
+</button>
+
+@if (proveedores.length==0){
+  <div class="alert alert-waring">No hay registros en el sistema</div>
+} @else {
+
+  <table class="table table-hover table-striped">
+      <thead>
+          <tr>
+            <th>id</th>
+            <th>nombre</th>
+            <th>telefono</th>
+            <th>email</th>
+            <th>direccion</th>
+           
+            @if(admin){
+                  <th>remove</th>
+                  <th>update</th>
+            }
+          </tr>
+      </thead>
+      <tbody>
+          @for (proveedor of proveedores; track $index) {
+            <tr>
+            <td>{{proveedor.id}}</td>
+            <td>{{proveedor.nombre}}</td>
+            <td>{{proveedor.telefono}}</td>
+            <td>{{proveedor.email}}</td>
+            <td>{{proveedor.direccion}}</td>
+          
+            @if(admin){
+              <td>
+                  <button class="btn btn-danger btn-sm"
+                  (click)="onRemoveProveedor(proveedor.id)"
+                  >
+                      remove
+                  </button>
+              </td>
+              <td>
+                  <button class="btn btn-info btn-sm"
+                  [routerLink]="['/proveedores/edit', proveedor.id]">
+                      update
+                  </button>
+              </td>
+            }
+            </tr>
+            }
+          
+          
+      </tbody>
+  </table>
+  }
+  <paginator [paginator]="paginator" [url]="'/proveedores/page'"/>
+
+
+

@@ -1,0 +1,82 @@
+<div class="p-4">
+  <h3 class="text-2xl font-bold text-gray-800 mb-6">{{ Title }}</h3>
+
+  <button
+    class="bg-blue-500 text-white font-medium py-2 px-4 rounded-md shadow-md hover:bg-blue-600 transition-all mb-6"
+    [routerLink]="['/ventas/create']"
+  >
+    Crear Venta
+  </button>
+
+  @if (ventas.length === 0) {
+    <div class="bg-yellow-100 text-yellow-800 border border-yellow-400 p-4 rounded-md">
+      No hay registros en el sistema
+    </div>
+  }
+
+  @if (ventas.length > 0) {
+    <div  class="overflow-x-auto">
+      <table class="min-w-full table-auto border-collapse border border-gray-300 shadow-lg rounded-lg">
+        <thead>
+          <tr class="bg-gray-200 text-gray-700 uppercase text-sm leading-normal">
+            <th class="py-3 px-6 text-left">ID</th>
+            <th class="py-3 px-6 text-left">Monto Total</th>
+            <th class="py-3 px-6 text-left">Fecha Venta</th>
+            <th class="py-3 px-6 text-left">Cantidad Total</th>
+            @if (admin) {
+              <th  class="py-3 px-6 text-left">Remove</th>
+            }
+            @if (admin) {
+              <th  class="py-3 px-6 text-left">Ver</th>
+            }
+          </tr>
+        </thead>
+        <tbody>
+          @for (venta of ventas; track venta) {
+            <tr
+              class="border-b border-gray-200 hover:bg-gray-100"
+            >
+              <td class="py-3 px-6">{{ venta.id }}</td>
+              <td class="py-3 px-6">{{ venta.montoTotal }}</td>
+              <td class="py-3 px-6">{{ venta.fechaVenta }}</td>
+              <td class="py-3 px-6">{{ venta.cantidadTotal }}</td>
+
+              @if (admin) {
+                <td class="py-3 px-6">
+                  <button
+                    class="bg-red-500 text-white font-medium py-1 px-3 rounded-md hover:bg-red-600 transition-all text-sm"
+                    (click)="onRemoveVenta(venta.id)"
+                  >
+                    Remove
+                  </button>
+                </td>
+
+              }
+              @if (admin) {
+                <td class="py-3 px-6">
+                  <button (click)="openModal(venta)"
+                    class="bg-teal-500 text-white font-medium py-1 px-3 rounded-md hover:bg-teal-600 transition-all text-sm"
+                    >
+                    Ver
+                    <!-- [routerLink]="['/ventas/edit', venta.id]" -->
+                  </button>
+                </td>
+
+              }
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+
+  <paginator [paginator]="paginator" [url]="'/ventas/page'" class="mt-6"></paginator>
+
+  <!-- Modal -->
+  <app-venta-modal
+    [venta]="selectedVenta"
+    [isOpen]="isModalOpen"
+    (click)="closeModal()"
+  ></app-venta-modal>
+</div>
+

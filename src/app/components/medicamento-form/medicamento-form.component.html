@@ -1,0 +1,98 @@
+<div class="card">
+  <div class="card-content">
+      <div class="card-header">
+          <h5 class="card-title">Formulario {{(medicamento.id > 0)? 'Update': 'Create'}} Medicamento</h5>
+      </div>
+      <div class="card-body">
+
+          <form (ngSubmit)="onSubmit1(medicamentoForm)" #medicamentoForm="ngForm">
+
+
+            
+
+              <div>
+                  <input placeholder="Nombre" name="nombre" [(ngModel)]="medicamento.nombre" class="form-control my-2"
+                      #nombre="ngModel">
+
+                  @if (errors?.nombre) {
+                  <div class="text-danger">{{ errors.nombre }}</div>
+                  }
+
+              </div>
+
+              <div>
+                  <input placeholder="Precio" name="precio" [(ngModel)]="medicamento.precio" class="form-control my-2"
+                      type="precio" #precio="ngModel"> 
+                  @if (errors?.precio) {
+                      <div class="text-danger">{{ errors.precio }}</div>
+                  }
+              </div>
+
+               <!-- Fecha de Vencimiento -->
+        <div>
+          <input
+            placeholder="Fecha de Vencimiento"
+            name="fechaVencimiento"
+            [(ngModel)]="medicamento.fechaVencimiento"
+            class="form-control my-2"
+            type="date"
+            #fechaVencimiento="ngModel"
+            required
+          />
+        </div>
+
+         <!-- Vía de Administración -->
+  <div>
+    <input
+      placeholder="Vía de Administración"
+      name="viaAdministracion"
+      [(ngModel)]="medicamento.viaAdministracion"
+      class="form-control my-2"
+    
+    />
+  </div>
+
+              <div>
+                  <input placeholder="Categoria" name="categoria" [(ngModel)]="medicamento.categoria" class="form-control my-2"
+                      type="categoria" #categoria="ngModel">  
+                  @if (errors?.categoria) {
+                      <div class="text-danger">{{ errors.categoria }}</div>
+                  }
+              </div>
+
+
+              <div>
+                <select
+                  class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                  [(ngModel)]="medicamento.laboratorioId"
+                  (change)="onLaboratorioSelect($event)"
+                  name="laboratorioId"
+                
+                >
+                  <option value="" disabled>Seleccione un laboratorio</option>
+                  @for (laboratorio of filteredLaboratorios; track $index) {
+                    <option [value]="laboratorio.id">{{ laboratorio.nombre }} </option>}
+                </select>
+               
+              </div>
+      
+
+            
+             
+          
+            
+              <div>
+                  <button type="submit" class="btn btn-primary m-2"> <!-- [disabled]="userForm.invalid" -->
+                      {{(medicamento.id > 0)? 'Update': 'Create'}}
+                  </button>
+
+                  <button type="button" class="btn btn-secondary my-2" (click)="onClear(medicamentoForm)">
+                      Clear
+                  </button>
+              </div>
+
+          </form>
+      </div>
+
+  </div>
+</div>

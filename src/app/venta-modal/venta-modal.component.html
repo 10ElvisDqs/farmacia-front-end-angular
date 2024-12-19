@@ -1,0 +1,59 @@
+<div *ngIf="isOpen" class="fixed inset-0 bg-gradient-to-br from-white/50 to-gray-800/50 backdrop-blur-lg flex w-screen h-screen items-center justify-center z-50">
+  <div class="bg-white bg-opacity-60 shadow-lg rounded-lg p-8 w-full max-w-lg backdrop-blur-lg">
+    <h1 class="text-3xl font-bold text-gray-800 mb-4 text-center">✨ Detalles de la Venta</h1>
+
+    <div class="space-y-6 text-gray-700">
+      <!-- Información General -->
+      <div class="flex items-center justify-between bg-gradient-to-r from-blue-400/70 to-indigo-500/70 text-white rounded-lg p-3 shadow-md backdrop-blur-lg">
+        <div class="flex items-center space-x-2">
+          <img
+          class="w-20 h-20"
+          src="https://img.icons8.com/?size=100&id=5CLFO93runX4&format=png&color=000000" alt="">
+
+          <div>
+            <p><span class="font-semibold">ID:</span> {{ venta.id }}</p>
+            <p><span class="font-semibold">Monto Total:</span> ${{ venta.montoTotal }}</p>
+            <p><span class="font-semibold">Cantidad Total:</span> {{ venta.cantidadTotal }}</p>
+            <p><span class="font-semibold">Fecha:</span> {{ venta.fechaVenta }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Información del Cliente -->
+      <div class="flex items-center justify-between bg-gradient-to-r from-green-400/70 to-teal-500/70 text-white rounded-lg p-3 shadow-md backdrop-blur-lg">
+        <div class="flex items-center space-x-2">
+          <img
+          class="w-20 h-20"
+          src="https://img.icons8.com/?size=100&id=GKa451kLBjuW&format=png&color=000000" alt="">
+
+          <div>
+            <p><span class="font-semibold">Cliente:</span> {{ venta.clienteNombre }}</p>
+            <p><span class="font-semibold">Usuario:</span> {{ venta.usuarioNombre }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Detalles de los Productos -->
+      <div>
+        <h2 class="text-lg font-bold text-gray-800 mb-3">🛍️ Productos en la Compra</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
+          <div *ngFor="let item of venta.detalles" class="p-4 bg-white/80 shadow-md rounded-lg transition transform hover:scale-105 backdrop-blur-md">
+            <p><span class="font-semibold">Producto:</span> {{ item.medicamentoNombre }}</p>
+            <p><span class="font-semibold">Cantidad:</span> {{ item.cantidadTipo }}</p>
+            <p><span class="font-semibold">Monto:</span> ${{ item.montoTipo }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Botón para Descargar el PDF -->
+      <div class="text-right mt-4">
+        <button
+          (click)="generatePDF()"
+          class="bg-gradient-to-r from-blue-500/90 to-indigo-600/90 text-white px-5 py-3 rounded-lg shadow-lg hover:shadow-xl transition duration-200 transform hover:scale-105"
+        >
+          📄 Descargar PDF
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

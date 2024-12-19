@@ -1,0 +1,134 @@
+
+    
+            
+<div class="row">
+    <div class="col-7">
+      <div class="container mt-5">
+        <h1 class="text-center mb-4">Lista de Medicamentos</h1>
+        <div class="row">
+            @for (medicamento of medicamentos; track $index) {
+          <div class="col-3" >
+           
+            <div class="card" (click)="agregarAlCarrito(medicamento)">
+              <img class="card-img-top" src="https://img.freepik.com/vector-premium/varios-medicamentos-capsulas-pastillas-frascos-drogas_267448-246.jpg" alt="Imagen del medicamento">
+              <div class="card-body">
+                <p class="card-title"><strong>{{ medicamento.nombre }}</strong></p>
+                <p class="card-text">
+                  <strong>Precio:</strong> {{ medicamento.precio }}<br>
+                </p>
+                <button class="btn btn-primary w-100">
+                    <img src="https://img.icons8.com/?size=100&id=Txmr5D5syJpG&format=png&color=000000" alt="Icono" width="32" height="32">
+                </button>
+              </div>
+            </div>
+          </div>}
+        </div>
+      </div>
+    </div>
+    <div class="col-5">
+      <div class="card shadow p-1">
+        <div class="text-center mb-3">
+          <h1 class="display-4">{{ calcularTotal() }}</h1>
+          <p>Total</p>
+        </div>
+        <div class="card">
+          <div class="card-header bg-white">
+            <h5 class="mb-0">Detalle Compra</h5>
+          </div>
+          <div class="card-body">
+            <table class="table table-bordered text-center">
+              <thead class="thead-light">
+                <tr>
+                  <th>Artículo</th>
+                  <th>Cantidad</th>
+                  <th>Total</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (item of carrito; track $index) {
+                <tr >
+                   
+                  <td>{{ item.nombre }}</td>
+                  <td>{{ item.cantidad }}</td>
+                  <td>{{ item.cantidad * item.precio }}</td>
+                  <td>
+                   
+                    <button class="btn btn-outline-primary btn-sm me-1" (click)="abrirModalEditar(item)">Editar</button>
+                    <button class="btn btn-outline-danger btn-sm" (click)="eliminarItem(item)">Eliminar</button>
+                  </td>
+                </tr>}
+              </tbody>
+            </table>
+          </div>
+        </div>
+       
+        <div class="input-group flex-nowrap">
+           
+            <span class="input-group-text" id="addon-wrapping">Búsqueda</span>
+
+            <input 
+              type="text" 
+              class="form-control" 
+              placeholder="Buscar Proveedor" 
+              aria-label="Buscar Proveedor" 
+              aria-describedby="addon-wrapping" 
+              [(ngModel)]="searchText" 
+              (input)="filteredProveedors()">
+          </div>
+          
+          <select class="form-select form-select-sm" aria-label="Small select example"
+          [ngModel]="proveedorId" (change)="onClientSelect($event)">
+          <option selected disabled>Seleccione un Proveedor</option>
+            @for (proveedor of filteredProveedor; track $index) {
+            <option  [value]="proveedor.id">
+                
+              {{ proveedor.nombre }} 
+            </option>}
+          </select>
+        <button class="btn btn-dark w-100 mt-3" (click)="guardarVenta()">Guardar Venta</button>
+      </div>
+    </div>
+
+     <!-- Modal para Editar Cantidad -->
+     @if (showModal) {
+      <div class="modal" tabindex="-1" [ngClass]="{ 'show': showModal }" style="display: block;" >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Editar Cantidad</h5>
+              <button type="button" class="btn-close" (click)="cerrarModal()"></button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <label>Cantidad:</label>
+                <input
+                  type="number"
+                  [(ngModel)]="itemSeleccionado.cantidad"
+                  name="cantidad"
+                  class="form-control"
+                  [min]="0"
+                  
+                />
+                <br />
+                <!-- Campo de Precio 
+                <label>Precio Unitario:</label>
+                <input
+                  type="number"
+                  [(ngModel)]="itemSeleccionado.precio"
+                  name="precio"
+                  class="form-control"
+                  [min]="0"
+                  step="0.01"
+                />-->
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-secondary" (click)="cerrarModal()">Cancelar</button>
+              <button class="btn btn-primary" (click)="guardarCambios()">Guardar</button>
+            </div>
+          </div>
+        </div>
+      </div>}
+  </div>
+ 

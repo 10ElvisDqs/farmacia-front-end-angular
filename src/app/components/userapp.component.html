@@ -1,0 +1,15 @@
+<!-- Contenedor Principal con diseño de barra lateral -->
+<div class="flex  bg-slate-100  p-3">
+
+  <!-- Navbar Lateral con un diseño fijo en el lado izquierdo -->
+  <div class="w-64 pr-4 mr-2 h-screen">
+    <navbar [users]="users" [paginator]="paginator" class="shadow-md"></navbar>
+  </div>
+  <!-- Contenedor Principal -->
+  <div class="p-6  flex-1 bg-white  text-black rounded-lg shadow-md">
+    <!-- <div class="container bg-gray-800 rounded-lg shadow-md"> -->
+      <router-outlet></router-outlet>
+    <!-- </div> -->
+  </div>
+
+</div>
